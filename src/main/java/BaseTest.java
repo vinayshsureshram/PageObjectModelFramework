@@ -10,22 +10,36 @@ import pages.DashboardPage;
 import pages.LoginPage;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Driver;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
     private static WebDriver driver;
+    private static String browserName;
+    private static Properties prop;
 
     LoginPage loginPage;
     DashboardPage dashboardPage;
 
     @BeforeSuite
-    public void setUp() {
+    public void setUp() throws IOException {
         //Driver Initialisation
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/");
+        prop = new Properties();
+        FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+ "/src/main/java"
+                + "/config.properties");
+        prop.load(ip);
+        browserName = prop.getProperty("browser");
+
+        if(browserName.equals("Chrome")) {
+            driver = DriverFactory.getDriver("Chrome");
+        } else if(browserName.equals("Firefox")) {
+            driver = DriverFactory.getDriver("Firefox");
+        }
+        driver.get(prop.getProperty("url"));
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
