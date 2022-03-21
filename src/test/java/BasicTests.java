@@ -9,13 +9,10 @@ public class BasicTests extends BaseTest {
     @Description("Verify successful login on Swag Labs")
     @Test(dataProviderClass = ExcelReaderUtil.class, dataProvider = "getExcelData")
     public void firstTest(String userName, String password) {
-        loginPage.enterUsername(userName)
-                .enterPassword(password)
-                .clickLoginButton();
-        Assert.assertTrue(dashboardPage.verifyProductHeaderIsDisplayed(),"Login unsuccessful");
+        common.logInToApp(userName, password);
+        Assert.assertTrue(dashboardPage.verifyProductHeaderIsDisplayed(), "Login unsuccessful");
 
-        dashboardPage.clickHamBurgerMenu()
-                .clickLogOut();
+        common.logOutFromApp();
     }
 
     @Test

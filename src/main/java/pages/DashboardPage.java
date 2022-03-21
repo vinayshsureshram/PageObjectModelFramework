@@ -13,22 +13,7 @@ public class DashboardPage extends BasePage {
     @FindBy (xpath = "//span[text()='Products']")
     private WebElement productsHeader;
 
-    @FindBy (id = "react-burger-menu-btn")
-    private WebElement hamburgerMenu;
-
-    @FindBy (id = "logout_sidebar_link")
-    private WebElement logOutButton;
-
     public boolean verifyProductHeaderIsDisplayed() {
         return productsHeader.isDisplayed();
-    }
-
-    public DashboardPage clickHamBurgerMenu() {
-        hamburgerMenu.click();
-        return this;
-    }
-
-    public void clickLogOut() {
-        logOutButton.click();
     }
 }

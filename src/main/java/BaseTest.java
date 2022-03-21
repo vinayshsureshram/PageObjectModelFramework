@@ -1,29 +1,28 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import pages.Common;
 import pages.DashboardPage;
 import pages.LoginPage;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Driver;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-    private static WebDriver driver;
+    public static WebDriver driver;
     private static String browserName;
     private static Properties prop;
 
-    LoginPage loginPage;
-    DashboardPage dashboardPage;
+    public LoginPage loginPage;
+    public DashboardPage dashboardPage;
+    public Common common;
 
     @BeforeSuite
     public void setUp() throws IOException {
@@ -46,6 +45,7 @@ public class BaseTest {
         //Page Objects initialisation
         loginPage = new LoginPage(driver);
         dashboardPage = new DashboardPage(driver);
+        common = new Common(driver);
     }
 
     @AfterSuite
