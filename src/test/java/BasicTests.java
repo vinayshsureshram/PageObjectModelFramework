@@ -7,7 +7,7 @@ public class BasicTests extends BaseTest {
 
     @TmsLink("MBP-1234")
     @Description("Verify successful login on Swag Labs")
-    @Test(dataProviderClass = ExcelReaderUtil.class, dataProvider = "getExcelData")
+    @Test(dataProviderClass = utils.ExcelReaderUtil.class, dataProvider = "getExcelData")
     public void firstTest(String userName, String password) {
         common.logInToApp(userName, password);
         Assert.assertTrue(dashboardPage.verifyProductHeaderIsDisplayed(), "Login unsuccessful");

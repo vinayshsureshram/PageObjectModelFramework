@@ -6,14 +6,33 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.net.MalformedURLException;
 
 public class DriverFactory {
-    public static WebDriver getDriver(String browserName) throws MalformedURLException {
-        if (browserName == "Chrome") {
-            WebDriverManager.chromedriver().setup();
-            return new ChromeDriver();
-        } else if (browserName == "Firefox") {
-            WebDriverManager.firefoxdriver().setup();
-            return new FirefoxDriver();
-        } else
-            return null;
+
+    private static WebDriver driver;
+    private static DriverFactory driverfactory;
+
+    private DriverFactory() {
+    }
+
+    public static DriverFactory getInstance() {
+        if (driverfactory == null) {
+            driverfactory = new DriverFactory();
+        }
+        return driverfactory;
+    }
+
+    public WebDriver getDriver(String browserName) throws MalformedURLException {
+        if (driver == null) {
+            if (browserName == "Chrome") {
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                return driver;
+            } else if (browserName == "Firefox") {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                return driver;
+            } else
+                return null;
+        }
+        return driver;
     }
 }

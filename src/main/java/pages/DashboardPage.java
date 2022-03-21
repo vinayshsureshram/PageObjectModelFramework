@@ -14,6 +14,6 @@ public class DashboardPage extends BasePage {
     private WebElement productsHeader;
 
     public boolean verifyProductHeaderIsDisplayed() {
-        return productsHeader.isDisplayed();
+        return find(productsHeader,5).isDisplayed();
     }
 }

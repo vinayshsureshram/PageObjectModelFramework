@@ -20,12 +20,12 @@ public class Common extends BasePage {
 
 
     public Common clickHamBurgerMenu() {
-        hamburgerMenu.click();
+        find(hamburgerMenu).click();
         return this;
     }
 
     public void clickLogOut() {
-        logOutButton.click();
+        find(logOutButton).click();
     }
 
     public void logInToApp(String userName, String password) {

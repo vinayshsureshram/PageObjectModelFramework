@@ -20,16 +20,16 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
 
     public LoginPage enterUsername(String user){
-        userName.sendKeys(user);
+        find(userName, 5).sendKeys(user);
         return this;
     }
 
     public LoginPage enterPassword(String pass){
-        password.sendKeys(pass);
+        find(password, 5).sendKeys(pass);
         return this;
     }
 
     public void clickLoginButton(){
-        loginButton.click();
+        find(loginButton).click();
     }
 }

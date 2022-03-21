@@ -19,6 +19,7 @@ public class BaseTest {
     public static WebDriver driver;
     private static String browserName;
     private static Properties prop;
+    DriverFactory driverFactory;
 
     public LoginPage loginPage;
     public DashboardPage dashboardPage;
@@ -34,9 +35,9 @@ public class BaseTest {
         browserName = prop.getProperty("browser");
 
         if(browserName.equals("Chrome")) {
-            driver = DriverFactory.getDriver("Chrome");
+            driver = DriverFactory.getInstance().getDriver("Chrome");
         } else if(browserName.equals("Firefox")) {
-            driver = DriverFactory.getDriver("Firefox");
+            driver = DriverFactory.getInstance().getDriver("Firefox");
         }
         driver.get(prop.getProperty("url"));
         driver.manage().window().maximize();
@@ -52,6 +53,7 @@ public class BaseTest {
     public void tearDown() {
         driver.close();
         driver.quit();
+        driver = null;
     }
 
     public static void getScreenshot(String s) throws IOException {
